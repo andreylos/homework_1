@@ -10,22 +10,14 @@ public class Task2 {
 
     public static void main(String[] args) {
         String s = "Andrey";
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 10; j++) {
-                System.out.print("*");
+                System.out.print(s + " ");
             }
             System.out.println();
         }
     }
 }
-
-
-
-
-
-
-
-
 
         /*System.out.println(
                 s + " " + s + " " + s + " " + s + " " + s + " " + s + " " + s + " " + s + " " + s + " "
