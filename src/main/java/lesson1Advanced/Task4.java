@@ -17,6 +17,7 @@ public class Task4 {
     }
 
     public static String minVersion(String v1, String v2) {
+
         return v1;
     }
 }
