@@ -23,9 +23,10 @@ public class Task1 {
 
     public static void main(String[] args) {
         Task1 Task = new Task1();
-        Task.setName("maxim");
-        Task.setAge(26);
+        Task.setName("max");
+        Task.setAge(90);
         System.out.println(Task.getName() + " " + Task.getAgeGroup() + " " + Task.getAge());
+        System.out.println(Task.getAge());
     }
 
     private int age;
@@ -45,9 +46,10 @@ public class Task1 {
         } else if (age > 65 && age <= 100) {
             this.age = age;
             ageGroup = "pensioner";
-        } else
+        } else {
             System.out.println("Age should be more than 0 and less than 101");
             this.age = 1;
+        }
     }
 
     public int getAge() {
