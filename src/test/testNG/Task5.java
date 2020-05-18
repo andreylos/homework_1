@@ -1,4 +1,4 @@
-package main.java.lesson1;
+package test.testNG;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

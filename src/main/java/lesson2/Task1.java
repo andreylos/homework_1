@@ -76,4 +76,5 @@ public class Task1 {
     private void setAgeGroup(String ageGroup) {
         this.ageGroup = ageGroup;
     }
+
 }
