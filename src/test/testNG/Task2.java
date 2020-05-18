@@ -7,8 +7,11 @@ System.out.println, System.out.print можно использовать тол�
 */
 
 import org.testng.Assert;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import java.util.Arrays;
 
 public class Task2 {
 
@@ -29,12 +32,12 @@ public class Task2 {
 
     @Parameters({"myName"})
     @Test
-    public void verifyNumberOfNames(String name){
+    public void verifyNumberOfNames(@Optional("Alex") String name){
         int expectedNamesCount = 50;
         String temp = printName(name);
         temp = temp.replaceAll("\n", "");
         String[] names = temp.split("\\s+");
-        //System.out.println(Arrays.toString(names));
+        System.out.println(Arrays.toString(names));
         Assert.assertTrue(expectedNamesCount == names.length,
                 "There should be " + expectedNamesCount + " names, but got " + names.length);
     }
