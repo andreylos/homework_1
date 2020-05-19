@@ -13,14 +13,13 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.testng.Assert.assertTrue;
+
 public class RozetkaTest {
     WebDriver driver;
     WebDriverWait wait;
-    //String searchStr = "iPhone";
-    //String popupStrSelect = "[class='popup-css lang-switcher-popup sprite-side']";
     By myCabinet = By.cssSelector("[class='header-topline__user-link link-dashed']");
     By register = By.cssSelector("[class='auth-modal__register-link']");
-    By enter = By.cssSelector("[class='button button_size_large button_color_green auth-modal__submit']");
     By name = By.cssSelector("[formcontrolname='name']");
     By email = By.cssSelector("[formcontrolname='username']");
     By password = By.cssSelector("[formcontrolname='password']");
@@ -38,50 +37,47 @@ public class RozetkaTest {
     }
 
     @Test
-    public void fieldsValidation1() throws InterruptedException {
+    public void fieldsValidation1() {
+        String expectedBorderColor = "rgb(248, 65, 71)";
         driver.get("https://rozetka.com.ua/");
         wait.until(ExpectedConditions.elementToBeClickable(myCabinet));
         driver.findElement(myCabinet).click();
-        Thread.sleep(3000);
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(register)));
-        driver.findElement(register).click();
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(enter)));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(register)));
+        driver.findElement(register).click(); // кнопка почему то нажимается через раз
         driver.findElement(name).sendKeys(Keys.TAB);
         driver.findElement(email).sendKeys(Keys.TAB);
         driver.findElement(password).sendKeys(Keys.TAB);
-        Thread.sleep(1000);
-        //wait.until(ExpectedConditions.visibilityOf(driver.findElement(name)));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(name));
+        wait.until(ExpectedConditions.attributeToBe(name, "border-color", expectedBorderColor));
         String color = driver.findElement(name).getCssValue("border-color");
-        System.out.println(color);
-
-
-
-
-        Thread.sleep(5000);
-//        driver.get("https://rozetka.com.ua/notebooks/c80004/filter/preset=workteaching/");
-//        WebElement searchEl2 = driver.findElement(search);
-//        wait.until(ExpectedConditions.elementToBeClickable(searchEl2));
-//        if( driver.findElements(popup).size() > 0 ) {
-//            driver.findElement(popupClose).click();
-//        }
-//        searchEl2.click();
-//        /wait.until(ExpectedConditions.elementToBeClickable(suggestion));
-//        wait.until(ExpectedConditions.elementToBeClickable(suggestion)).click();
-//        driver.findElement(suggestion).click();
-//        wait.until(ExpectedConditions.and(
-//                ExpectedConditions.visibilityOfElementLocated(iPhone),
-//                ExpectedConditions.urlContains(searchStr.toLowerCase())
-//        ));
-//        String actual = driver.getCurrentUrl();
-//        String expected = "/#search_text=" + searchStr.toLowerCase();
-//        assertTrue(actual.contains(expected),
-//                String.format("Expected '%s' to contain '%s'", actual, expected));
-//
-//        driver.findElement(logo).click();
-//        new WebDriverWait(driver, 10).until(ExpectedConditions.not(ExpectedConditions.presenceOfElementLocated(iPhone)));
-//        new WebDriverWait(driver, 10).until(ExpectedConditions.stalenessOf(driver.findElement(iPhone)));
+        assertTrue(expectedBorderColor.equals(color), "Border color should be " + expectedBorderColor + " instead of " + color);
     }
+
+    @Test
+    public void fieldsValidation2() {
+        String expectedValidatedBorderColor = "rgb(248, 65, 71)";
+        String expectedNonValidatedBorderColor = "rgb(210, 210, 210)";
+        driver.get("https://rozetka.com.ua/");
+        wait.until(ExpectedConditions.elementToBeClickable(myCabinet));
+        driver.findElement(myCabinet).click();
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(register)));
+        driver.findElement(register).click(); // кнопка почему то нажимается через раз
+        driver.findElement(name).sendKeys("Андрей");
+        driver.findElement(email).sendKeys(Keys.TAB);
+        driver.findElement(password).sendKeys(Keys.TAB);
+        wait.until(ExpectedConditions.attributeToBe(name, "border-color", expectedNonValidatedBorderColor));
+        String colorNameField = driver.findElement(name).getCssValue("border-color");
+        assertTrue(expectedNonValidatedBorderColor.equals(colorNameField),
+                "Border color should be " + expectedNonValidatedBorderColor + " instead of " + colorNameField);
+        wait.until(ExpectedConditions.attributeToBe(email, "border-color", expectedValidatedBorderColor));
+        wait.until(ExpectedConditions.attributeToBe(password, "border-color", expectedValidatedBorderColor));
+        String colorEmailField = driver.findElement(email).getCssValue("border-color");
+        String colorPasswordField = driver.findElement(password).getCssValue("border-color");
+        assertTrue(expectedValidatedBorderColor.equals(colorEmailField),
+                "Border color should be " + expectedValidatedBorderColor + " instead of " + colorEmailField);
+        assertTrue(expectedValidatedBorderColor.equals(colorPasswordField),
+                "Border color should be " + expectedValidatedBorderColor + " instead of " + colorPasswordField);
+    }
+
 
     @AfterMethod
     public void afterMethod() {
