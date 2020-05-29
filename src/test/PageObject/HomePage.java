@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,13 +19,22 @@ public class HomePage {
     private final By itemLinks = By.cssSelector("[class='goods-tile__title']");
     private final By productTypeLinks = By.cssSelector("[class='menu-categories__link']");
     private String searchStr;
+    private final String manufacturer;
+    private final String popupStrSelect = "[class='popup-css lang-switcher-popup sprite-side']";
     Logger logger = LogManager.getLogger(HomePage.class);
 
-    String popupStrSelect = "[class='popup-css lang-switcher-popup sprite-side']";
-    By search = By.cssSelector("[name='search']");
-    By popup = By.cssSelector(popupStrSelect);
-    By popupClose = By.cssSelector(popupStrSelect + " [class='popup-close']");
-    By contactBtn = By.cssSelector("[href='https://rozetka.com.ua/contacts/']");
+    @FindBy(css = "[name='search']")
+            private WebElement search;
+    @FindBy(css = popupStrSelect)
+            private WebElement popup;
+    @FindBy(css = popupStrSelect + " [class='popup-close']")
+            private WebElement popupClose;
+    @FindBy(css = "[href='https://rozetka.com.ua/contacts/']")
+            private WebElement contactBtn;
+    @FindBy(css = "[id="+manufacturer+"]")
+            private WebElement manufacturerBtn;
+
+
 
 
     public HomePage(WebDriver driver) {

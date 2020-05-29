@@ -3,6 +3,7 @@ package test.PO_Homework;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import test.PageObject.HomePage;
 import java.util.ArrayList;
@@ -45,5 +46,26 @@ public class Rozetka extends TestBaseSetup {
         ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(categoryList));
         Assert.assertTrue(sideLinks.equals(arrayList), "Categories list is wrong on the side panel");
     }
-}
+
+    @DataProvider(name = "manufacturers")
+    public Object[][] getData() {
+        return new Object[][]{
+                {"Acer"},
+                //{"Apple"},
+                //{"Asus"}
+            };
+        }
+
+        @Test(dataProvider = "manufacturers")
+        public void verifyManufacturersFilter (String manufacturer) {
+            driver.get("https://rozetka.com.ua/notebooks/c80004/");
+
+
+            List<WebElement> webLinks = homePage.getItems();
+
+            System.out.println(webLinks.size());
+
+        }
+    }
+
 
