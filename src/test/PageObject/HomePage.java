@@ -19,21 +19,17 @@ public class HomePage {
     private final By itemLinks = By.cssSelector("[class='goods-tile__title']");
     private final By productTypeLinks = By.cssSelector("[class='menu-categories__link']");
     private String searchStr;
-    private final String manufacturer;
     private final String popupStrSelect = "[class='popup-css lang-switcher-popup sprite-side']";
     Logger logger = LogManager.getLogger(HomePage.class);
 
     @FindBy(css = "[name='search']")
             private WebElement search;
     @FindBy(css = popupStrSelect)
-            private WebElement popup;
+            private List<WebElement> popup;
     @FindBy(css = popupStrSelect + " [class='popup-close']")
             private WebElement popupClose;
     @FindBy(css = "[href='https://rozetka.com.ua/contacts/']")
             private WebElement contactBtn;
-    @FindBy(css = "[id="+manufacturer+"]")
-            private WebElement manufacturerBtn;
-
 
 
 
@@ -56,13 +52,12 @@ public class HomePage {
     public HomePage search(String searchStr) {
         logger.info("Searching start");
         this.searchStr = searchStr;
-        WebElement searchEl = driver.findElement(search);
-        wait.until(ExpectedConditions.elementToBeClickable(searchEl));
-        if (driver.findElements(popup).size() > 0) {
-            driver.findElement(popupClose).click();
+        wait.until(ExpectedConditions.elementToBeClickable(search));
+        if (popup.size() > 0) {
+            popupClose.click();
         }
-        searchEl.sendKeys(this.searchStr);
-        searchEl.sendKeys(Keys.ENTER);
+        search.sendKeys(this.searchStr);
+        search.sendKeys(Keys.ENTER);
         logger.debug("Searching " + searchStr);
         return this;
     }
@@ -77,6 +72,12 @@ public class HomePage {
         logger.info("Getting product types");
         wait.until(ExpectedConditions.visibilityOfElementLocated(productTypeLinks));
         return driver.findElements(productTypeLinks);
+        }
+
+        public void chooseManufacturer(WebElement button) {
+        //wait.until(ExpectedConditions.visibilityOfElementLocated((By) button));
+        button.click();
+        //return driver.findElements(itemLinks);
         }
     }
 

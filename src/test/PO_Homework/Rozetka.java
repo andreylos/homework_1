@@ -1,6 +1,7 @@
 package test.PO_Homework;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -18,6 +19,14 @@ public class Rozetka extends TestBaseSetup {
             "Инструменты и автотовары", "Сантехника и ремонт", "Дача, сад и огород", "Спорт и увлечения",
             "Одежда, обувь и украшения", "Красота и здоровье", "Детские товары", "Канцтовары и книги", "Алкогольные напитки и продукты",
             "Товары для бизнеса", "Услуги и сервисы", "Продовольственные наборы"};
+
+    //@FindBy(css = "[href$='/notebooks/c80004/producer=acer/']")
+    @FindBy(css = "[class='menu-toggler__text']")
+    private WebElement acerBtn;
+    @FindBy(css = "label[for=Apple]")
+    private WebElement appleBtn;
+    @FindBy(css = "label[for=Asus]")
+    private WebElement asusBtn;
 
     @BeforeMethod
     public void initialize() {
@@ -50,20 +59,20 @@ public class Rozetka extends TestBaseSetup {
     @DataProvider(name = "manufacturers")
     public Object[][] getData() {
         return new Object[][]{
-                {"Acer"},
+                {acerBtn},
                 //{"Apple"},
                 //{"Asus"}
             };
         }
 
         @Test(dataProvider = "manufacturers")
-        public void verifyManufacturersFilter (String manufacturer) {
+        public void verifyManufacturersFilter (WebElement manufacturer) throws InterruptedException {
             driver.get("https://rozetka.com.ua/notebooks/c80004/");
-
-
-            List<WebElement> webLinks = homePage.getItems();
-
-            System.out.println(webLinks.size());
+            Thread.sleep(3000);
+            homePage.chooseManufacturer(manufacturer);
+            Thread.sleep(5000);
+            //List<WebElement> webLinks = homePage.getItems();
+            //System.out.println(webLinks.size());
 
         }
     }
