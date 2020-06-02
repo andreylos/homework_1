@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import test.utils.Screenshot;
 
 public class TestBaseSetup {
-    WebDriver driver;
+    public WebDriver driver;
     Screenshot screenshot;
 
     @BeforeMethod

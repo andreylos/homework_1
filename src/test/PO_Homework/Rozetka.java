@@ -7,12 +7,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import test.PageObject.HomePage;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Rozetka extends TestBaseSetup {
     HomePage homePage;
+
 
     private String searchQuery = "iPhone";
     private String[] categoryList = {"Ноутбуки и компьютеры", "Смартфоны, ТВ и электроника", "Бытовая техника", "Товары для дома",

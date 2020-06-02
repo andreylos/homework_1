@@ -79,7 +79,7 @@ public class HomePage {
         public void chooseManufacturer(WebElement button) {
         //wait.until(ExpectedConditions.visibilityOfElementLocated((By) button));
         button.click();
-        //return driver.findElements(itemLinks);
+        //return this;
         }
     }
 
