@@ -19,6 +19,7 @@ public class HomePage {
     private final WebDriverWait wait;
     private final By itemLinks = By.cssSelector("[class='goods-tile__title']");
     private final By productTypeLinks = By.cssSelector("[class='menu-categories__link']");
+    private final By productsLinks = By.cssSelector("[class='goods-tile__title']");
     private String searchStr;
     private final String popupStrSelect = "[class='popup-css lang-switcher-popup sprite-side']";
     Logger logger = LogManager.getLogger(HomePage.class);
@@ -76,11 +77,17 @@ public class HomePage {
         return driver.findElements(productTypeLinks);
         }
 
-        public void chooseManufacturer(WebElement button) {
-        //wait.until(ExpectedConditions.visibilityOfElementLocated((By) button));
+        public void chooseManufacturer(String manufacturer) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[href$='/notebooks/c80004/producer="+manufacturer.toLowerCase()+"/']")));
+        WebElement button = driver.findElement(By.cssSelector("[href$='/notebooks/c80004/producer="+manufacturer.toLowerCase()+"/']"));
         button.click();
-        //return this;
         }
+
+        public List<WebElement> getProductsLinks() {
+        logger.info("Getting product links");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(productsLinks));
+        return driver.findElements(productsLinks);
+    }
     }
 
 

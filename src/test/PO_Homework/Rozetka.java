@@ -1,16 +1,13 @@
 package test.PO_Homework;
 
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import test.PageObject.HomePage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Rozetka extends TestBaseSetup {
     HomePage homePage;
@@ -22,13 +19,6 @@ public class Rozetka extends TestBaseSetup {
             "Одежда, обувь и украшения", "Красота и здоровье", "Детские товары", "Канцтовары и книги", "Алкогольные напитки и продукты",
             "Товары для бизнеса", "Услуги и сервисы", "Продовольственные наборы"};
 
-    //@FindBy(css = "[href$='/notebooks/c80004/producer=acer/']")
-    @FindBy(css = "[class='menu-toggler__text']")
-    private WebElement acerBtn;
-    @FindBy(css = "label[for=Apple]")
-    private WebElement appleBtn;
-    @FindBy(css = "label[for=Asus]")
-    private WebElement asusBtn;
 
     @BeforeMethod
     public void initialize() {
@@ -61,21 +51,23 @@ public class Rozetka extends TestBaseSetup {
     @DataProvider(name = "manufacturers")
     public Object[][] getData() {
         return new Object[][]{
-                {acerBtn},
-                //{"Apple"},
-                //{"Asus"}
+                {"Acer"},
+                {"Apple"},
+                {"Asus"}
             };
         }
 
         @Test(dataProvider = "manufacturers")
-        public void verifyManufacturersFilter (WebElement manufacturer) throws InterruptedException {
+        public void verifyManufacturersFilter (String manufacturer) {
             driver.get("https://rozetka.com.ua/notebooks/c80004/");
-            Thread.sleep(3000);
             homePage.chooseManufacturer(manufacturer);
-            Thread.sleep(5000);
-            //List<WebElement> webLinks = homePage.getItems();
-            //System.out.println(webLinks.size());
-
+            List<WebElement> webLinks = homePage.getProductsLinks();
+            Set<Boolean> productLinks = new HashSet<Boolean>();
+            for (WebElement element: webLinks) {
+                boolean t = element.getText().contains(manufacturer);
+                productLinks.add(t);
+            }
+            Assert.assertFalse(productLinks.contains(false),"One of product links relates to wrong product");
         }
     }
 
