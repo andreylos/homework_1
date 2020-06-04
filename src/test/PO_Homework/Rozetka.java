@@ -6,19 +6,16 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import test.PageObject.HomePage;
-
 import java.util.*;
 
 public class Rozetka extends TestBaseSetup {
     HomePage homePage;
 
-
     private String searchQuery = "iPhone";
-    private String[] categoryList = {"Ноутбуки и компьютеры", "Смартфоны, ТВ и электроника", "Бытовая техника", "Товары для дома",
+    private String[] categoryList = {"Ноутбуки1 и компьютеры", "Смартфоны, ТВ и электроника", "Бытовая техника", "Товары для дома",
             "Инструменты и автотовары", "Сантехника и ремонт", "Дача, сад и огород", "Спорт и увлечения",
             "Одежда, обувь и украшения", "Красота и здоровье", "Детские товары", "Канцтовары и книги", "Алкогольные напитки и продукты",
             "Товары для бизнеса", "Услуги и сервисы", "Продовольственные наборы"};
-
 
     @BeforeMethod
     public void initialize() {
