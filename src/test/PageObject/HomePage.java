@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import test.utils.PropertyLoader;
 
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class HomePage {
 
     public HomePage open() {
         logger.info("Page open");
-        driver.get("https://rozetka.com.ua/");
+        driver.get(PropertyLoader.loadProperty("homeUrl"));
         logger.debug("URL " + driver.getCurrentUrl());
         logger.error("Test Error");
         logger.warn("Test WARN");

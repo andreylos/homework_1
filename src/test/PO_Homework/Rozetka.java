@@ -6,13 +6,15 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import test.PageObject.HomePage;
+import test.utils.PropertyLoader;
+
 import java.util.*;
 
 public class Rozetka extends TestBaseSetup {
     HomePage homePage;
 
     private String searchQuery = "iPhone";
-    private String[] categoryList = {"Ноутбуки1 и компьютеры", "Смартфоны, ТВ и электроника", "Бытовая техника", "Товары для дома",
+    private String[] categoryList = {"1Ноутбуки и компьютеры", "Смартфоны, ТВ и электроника", "Бытовая техника", "Товары для дома",
             "Инструменты и автотовары", "Сантехника и ремонт", "Дача, сад и огород", "Спорт и увлечения",
             "Одежда, обувь и украшения", "Красота и здоровье", "Детские товары", "Канцтовары и книги", "Алкогольные напитки и продукты",
             "Товары для бизнеса", "Услуги и сервисы", "Продовольственные наборы"};
@@ -56,7 +58,7 @@ public class Rozetka extends TestBaseSetup {
 
         @Test(dataProvider = "manufacturers")
         public void verifyManufacturersFilter (String manufacturer) {
-            driver.get("https://rozetka.com.ua/notebooks/c80004/");
+            driver.get(PropertyLoader.loadProperty("notebooksUrl"));
             homePage.chooseManufacturer(manufacturer);
             List<WebElement> webLinks = homePage.getProductsLinks();
             Set<Boolean> productLinks = new HashSet<Boolean>();

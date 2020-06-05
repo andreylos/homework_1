@@ -38,8 +38,6 @@ public class Listener implements
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        Screenshot screenshot = new Screenshot((WebDriver) iTestResult.getTestContext().getAttribute("driver"));
-        screenshot.getScreenshot(iTestResult);
         logger.trace("TEST WAS SUCCESS");
     }
 
