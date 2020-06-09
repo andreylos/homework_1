@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-            <param>testing.xml</param>
+            <param>multithread.xml</param>
             <aspectj.version>1.8.10</aspectj.version>
     </properties>
 

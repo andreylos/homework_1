@@ -14,9 +14,15 @@ public class SecondTest extends TestBaseSetup {
     }
 
     @Test
-    public void testA() {
+    public void testC() {
         homePage.open();
-        System.out.println("Page opened");
+        System.out.println("Page 3 opened");
+    }
+
+    @Test
+    public void testD() {
+        homePage.open();
+        System.out.println("Page 4 opened");
     }
 }
 

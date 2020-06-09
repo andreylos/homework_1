@@ -16,6 +16,12 @@ public class FirstTest extends TestBaseSetup {
     @Test
     public void testA() {
         homePage.open();
-        System.out.println("Page opened");
+        System.out.println("Page 1 opened");
+    }
+
+    @Test
+    public void testB() {
+        homePage.open();
+        System.out.println("Page 2 opened");
     }
 }
