@@ -24,7 +24,7 @@ public class TestBaseSetup {
     public void beforeMethod(ITestContext context, @Optional("chrome") String browser){
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         Capabilities webDriverBrowser;
-        if (browser == "chrome") {
+        if (browser.equals("chrome")) {
             webDriverBrowser = new ChromeOptions();
         } else {
             webDriverBrowser = new FirefoxOptions();
