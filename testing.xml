@@ -9,7 +9,8 @@
 
     <test name="firstTest">
         <classes>
-            <class name="test.PO_Homework.Rozetka"></class>
+            <class name="test.testNG.Task2"></class>
+            <!--class name="test.PO_Homework.Rozetka"></class-->
         </classes>
     </test>
 </suite>
