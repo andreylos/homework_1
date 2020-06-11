@@ -1,5 +1,7 @@
 package test.Multithread;
 
+import io.qameta.allure.Step;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import test.PO_Homework.TestBaseSetup;
@@ -14,11 +16,14 @@ public class ThirdTest extends TestBaseSetup {
     }
 
     @Test
+    @Step
     public void testE() {
         homePage.open();
         System.out.println("Page 5 opened");
+        Assert.assertTrue(false);
     }
 
+    @Step
     @Test
     public void testF() {
         homePage.open();

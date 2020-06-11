@@ -2,7 +2,6 @@ package test.utils;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.WebDriver;
 import org.testng.*;
 
 public class Listener implements
@@ -43,8 +42,8 @@ public class Listener implements
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        Screenshot screenshot = new Screenshot((WebDriver) iTestResult.getTestContext().getAttribute("driver"));
-        screenshot.getScreenshot(iTestResult);
+//        Screenshot screenshot = new Screenshot((WebDriver) iTestResult.getTestContext().getAttribute("driver"));
+//        screenshot.getScreenshot(iTestResult);
     }
 
     @Override

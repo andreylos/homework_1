@@ -1,5 +1,6 @@
 package test.PageObject;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -44,7 +45,7 @@ public class HomePage {
         PageFactory.initElements(this.driver, this);
     }
 
-
+    @Step("Home page open")
     public HomePage open() {
         logger.info("Page open");
         driver.get(PropertyLoader.loadProperty("homeUrl"));
@@ -54,6 +55,7 @@ public class HomePage {
         return this;
     }
 
+    @Step("Search by {searchStr}")
     public HomePage search(String searchStr) {
         logger.info("Searching start");
         this.searchStr = searchStr;
@@ -66,31 +68,34 @@ public class HomePage {
         logger.debug("Searching " + searchStr);
         return this;
     }
-
+    @Step
         public List<WebElement> getItems() {
         logger.info("Getting items");
         wait.until(ExpectedConditions.visibilityOfElementLocated(itemLinks));
         return driver.findElements(itemLinks);
     }
-
+    @Step
         public List<WebElement> getSideProductTypes() {
         logger.info("Getting product types");
         wait.until(ExpectedConditions.visibilityOfElementLocated(productTypeLinks));
         return driver.findElements(productTypeLinks);
         }
 
+    @Step
         public void chooseManufacturer(String manufacturer) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[href$='/notebooks/c80004/producer="+manufacturer.toLowerCase()+"/']")));
         WebElement button = driver.findElement(By.cssSelector("[href$='/notebooks/c80004/producer="+manufacturer.toLowerCase()+"/']"));
         button.click();
         }
 
+    @Step
         public List<WebElement> getProductsLinks() {
         logger.info("Getting product links");
         wait.until(ExpectedConditions.visibilityOfElementLocated(productsLinks));
         return driver.findElements(productsLinks);
     }
 
+    @Step
         public String openPageAndChooseRandomManufacturer() {
             driver.get("https://rozetka.com.ua/notebooks/c80004/preset=workteaching/");
             int max = brands.length;

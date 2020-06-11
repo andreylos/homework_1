@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Error category",
+    "matchedStatuses": ["broken", "failed"],
+    "messageRegex": ".*Custom error.*"
+  },
+  {
+    "name": "No such element",
+    "matchedStatuses": ["broken", "failed"],
+    "messageRegex": ".*Unable to locate element.*"
+  }
+]
