@@ -15,6 +15,7 @@ import static org.testng.Assert.assertEquals;
 public class apiHomework {
     long id;
     String name = "My test project.";
+    String newName = "Updated project.";
 
     @Test
     public void post() {
@@ -52,11 +53,19 @@ public class apiHomework {
     }
 
     @Test(dependsOnMethods = "get")
-    public void put() {
-
+    public void changeName() {
+        String bodyJson = "{\"name\": \""+newName+"\"}";
+        given().
+                header("Authorization", "Bearer cc51e988199eeb5aaa9929b9738adcb6d7fa83fd")
+                .contentType(ContentType.JSON)
+                .body(bodyJson)
+                .when()
+                .post("https://api.todoist.com/rest/v1/projects/"+id)
+                .then()
+                .statusCode(204);
     }
 
-    @Test(dependsOnMethods = "put")
+    @Test(dependsOnMethods = "changeName")
     public void delete() {
         given().
                 header("Authorization", "Bearer cc51e988199eeb5aaa9929b9738adcb6d7fa83fd").
