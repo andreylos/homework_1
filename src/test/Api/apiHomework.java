@@ -63,6 +63,21 @@ public class apiHomework {
                 .post("https://api.todoist.com/rest/v1/projects/"+id)
                 .then()
                 .statusCode(204);
+        Response response = given().
+                header("Authorization", "Bearer cc51e988199eeb5aaa9929b9738adcb6d7fa83fd").
+                when().
+                get("https://api.todoist.com/rest/v1/projects");
+        JsonPath path = response.jsonPath();
+        List<Map> list = path.getList("");
+        List<String> actualNames = new ArrayList<>();
+        for (Map project: list) {
+            actualNames.add((String) project.get("name"));
+        }
+        response.
+                then().
+                statusCode(200)
+                .assertThat();
+        assertEquals(actualNames.get(1), newName);
     }
 
     @Test(dependsOnMethods = "changeName")
